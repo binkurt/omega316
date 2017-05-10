@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LeafletJS Example</title>
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <script src="js/lib/leaflet.js"></script>
+    <script type="application/javascript">
+        window.onload= function(){
+            var map = L.map('map').setView([41.015137, 28.979530], 13);
+
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+
+            }).addTo(map);
+        }
+    </script>
+</head>
+<body>
+    <div id="map" style="width: 600px; height: 400px;"></div>
+</body>
+</html>

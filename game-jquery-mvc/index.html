@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Game</title>
+<style type="text/css">
+@import url('css/bootstrap.css');
+
+@import url('css/bootstrap-theme.css');
+</style>
+<script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="game.js"></script>
+<script type="text/javascript" src="controller.js"></script>
+</head>
+<body>
+    <p />
+	<div class="container" role="main">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Number Guessing Game</h3>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label for="tries">Tries</label> 
+					<span id="tries" class="badge"></span>
+					<div class="progress">
+                       <div class="progress-bar progress-bar-striped"
+                            id="pbTries" 
+                            role="progressbar" 
+                            aria-valuenow="0" 
+                            aria-valuemin="0" 
+                            aria-valuemax="7" style="width: 0%">
+                       </div>
+                    </div>
+				</div>
+				<div class="form-group">
+					<label class="active">Counter</label> 
+					<span id="counter" class="badge"></span>
+					<div class="progress">
+                       <div class="progress-bar progress-bar-danger"
+                            id="pbCounter" 
+                            role="progressbar" 
+                            aria-valuenow="0" 
+                            aria-valuemin="0" 
+                            aria-valuemax="25" style="width: 0%">
+                       </div>
+                    </div>
+				</div>
+				<div class="form-group">
+					<label for="guess">Guess:</label> <input type="text" id="guess"
+						class="form-control" />
+					<button id="playButton" class="btn btn-success">Play</button>
+				</div>
+				<div id="validationMessageContainer" class="alert alert-danger" role="alert">
+        			<strong id="validationMessage"></strong>
+      			</div>								
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">History</h3>
+			</div>
+			<div class="panel-body">
+				<table id="history" class="table table-stripe">
+					<thead>
+						<tr>
+							<th>Guess</th>
+							<th>Message</th>
+						</tr>
+					</thead>
+					<tbody id="moves">
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Game Statistics</h3>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="active">Wins</label> 
+					<span id="wins" 
+					      class="badge"></span>
+				</div>
+				<div class="form-group">
+					<label class="active">Average Win Time</label> 
+					<span id="avgWinTime" class="badge" 
+					      data-bind="text: "></span>
+					<div class="progress">
+						<div class="progress-bar progress-bar-danger" 
+						     id="pbAvgWinTime"
+							role="progressbar"
+							aria-valuenow="0" 
+							aria-valuemin="0" 
+							aria-valuemax="25"
+							style="width: 0%"></div>
+					</div>
+				</div>
+			</div>
+		</div>			
+	</div>
+</body>
+</html>

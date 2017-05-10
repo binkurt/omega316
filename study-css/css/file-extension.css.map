@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAII,iCAA4B;EAC1B,OAAO,EAAE,iBAAqB;;AADhC,kCAA4B;EAC1B,OAAO,EAAE,kBAAqB;;AADhC,kCAA4B;EAC1B,OAAO,EAAE,kBAAqB;;AADhC,kCAA4B;EAC1B,OAAO,EAAE,kBAAqB",
+"sources": ["file-extension.sass"],
+"names": [],
+"file": "file-extension.css"
+}

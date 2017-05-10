@@ -1,0 +1,14 @@
+div {
+    font-family: Calibri;
+    text-shadow: 8px 8px 16px #bbbbbb;
+    font-size: 52pt;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition-duration: 5s;
+}
+#counter {
+    background-color: yellow;
+    border: solid red 1px;
+}
