@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IMDB Movie Search Page</title>
+    <style type="text/css">
+        @import url('css/bootstrap.css');
+        @import url('css/bootstrap-theme.css');
+    </style>
+    <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
+    <script type="text/javascript" src="js/imdb.js"></script>
+</head>
+<body>
+<p/>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">Search Panel</h2>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="from">From</label>
+                <input type="text"
+                       data-bind="value: from"
+                       id="from"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="to">To</label>
+                <input type="text"
+                       data-bind="value: to"
+                       id="to"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <select id="genre"
+                        data-bind="value: genre, options: genres, optionsText: 'name', optionsValue: 'name'"
+                        class="form-control">
+                </select>
+            </div>
+            <div class="form-group">
+                <button data-bind="click: search"
+                        class="btn btn-success">Search
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">Search Result</h2>
+        </div>
+        <div class="panel-body">
+            <table id="movies" class="table table-responsive table-striped">
+                <thead>
+                <tr>
+                    <td>No</td>
+                    <td>Title</td>
+                    <td>Year</td>
+                    <td>Directors</td>
+                    <td>Genres</td>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: movies">
+                <tr>
+                    <td><h4 style="font-size: 11pt;" data-bind="text: $index() + 1"></h4></td>
+                    <td><h4 style="font-size: 11pt;"><a
+                            data-bind="text: title, attr: { href : 'http://www.imdb.com/title/'+ imdb }"
+                            target="_blank"></a></h4></td>
+                    <td><h4 style="font-size: 11pt;" data-bind="text: year"></h4></td>
+                    <td data-bind="foreach: directors">
+                        <h4 style="font-size: 11pt;"><a
+                                data-bind="text: name, attr: { href : 'http://www.imdb.com/name/'+ imdb }"
+                                target="_blank"></a></h4>
+                    </td>
+                    <td data-bind="foreach: genres"><h4 style="font-size: 11pt;" data-bind="text: name"></h4></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
