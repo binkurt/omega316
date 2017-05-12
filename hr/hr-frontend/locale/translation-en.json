@@ -1,0 +1,22 @@
+{
+  "panelEmployee": "Employee",
+  "panelEmployees": "Employees",
+  "labelIdentityNo": "Identity No",
+  "labelName": "Full Name",
+  "labelSalary": "Salary",
+  "labelPhoto": "Photo",
+  "buttonAdd": "Add",
+  "buttonUpdate": "Update",
+  "buttonFind": "Find",
+  "buttonFindAll": "Find All",
+  "buttonDelete": "Delete",
+  "english": "English",
+  "turkish": "Turkish",
+  "columnNo": "No",
+  "columnIdentityNo": "Identity No",
+  "columnName": "Full Name",
+  "columnSalary": "Salary",
+  "columnPhoto": "Photo",
+  "columnOperations": "Operations",
+  "placeholderDropPhoto": "Drop photo here!"
+}

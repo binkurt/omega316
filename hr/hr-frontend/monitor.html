@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Monitoring</title>
+    <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/lib/i18next-1.7.7.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
+    <script type="text/javascript" src="js/lib/ko-file.js"></script>
+    <script type="text/javascript" src="js/lib/knockout.validation.min.js"></script>
+    <script type="text/javascript" src="js/lib/knockout-localization.js"></script>
+    <script type="text/javascript" src="js/lib/sockjs-0.3.4.js"></script>
+    <script type="text/javascript" src="js/lib/stomp.js"></script>
+    <script type="text/javascript" src="js/configuration.js"></script>
+</head>
+<body>
+<p/>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title" data-i18n="panelEmployees"></h2>
+        </div>
+        <div class="panel-body">
+            <table id="employees" class="table table-responsive table-striped">
+                <thead>
+                <tr>
+                    <td data-i18n="columnNo"></td>
+                    <td data-i18n="columnIdentityNo"></td>
+                    <td data-i18n="columnName"></td>
+                    <td data-i18n="columnSalary"></td>
+                    <td data-i18n="columnPhoto"></td>
+                    <td data-i18n="columnOperationType"></td>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: employees">
+                <tr>
+                    <td data-bind="text: $index() + 1"></td>
+                    <td data-bind="text: identityNo"></td>
+                    <td data-bind="text: name"></td>
+                    <td data-bind="text: salary"></td>
+                    <td><img style="height: 64px; width: 64px; border-radius: 32px;"
+                             data-bind="attr: {src: ImageUtil.toImage(photo)}"/></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

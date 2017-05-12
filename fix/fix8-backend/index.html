@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Application</title>
+    <style type="text/css">
+        @import url('css/bootstrap.css');
+        @import url('css/bootstrap-theme.css');
+        @import url('css/drag-and-drop.css');
+    </style>
+    <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/lib/i18next-1.7.7.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
+    <script type="text/javascript" src="js/configuration.js"></script>
+    <script type="text/javascript" src="js/fix.js"></script>
+</head>
+<body>
+<p/>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="col-md-10">
+            </div>
+            <div class="col-md-2">
+                <button data-bind="click: changeLng('tr')"
+                        data-i18n="turkish"
+                        class="btn btn-success"></button>
+                <button data-bind="click: changeLng('en')"
+                        data-i18n="english"
+                        class="btn btn-success"></button>
+            </div>
+            <h3 class="panel-title" data-i18n="panelCurrencyRate"></h3>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="base" data-i18n="labelBase"></label>
+                <input type="text"
+                       data-bind="value: currencyRate.base"
+                       id="base"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="target" data-i18n="labelTarget"></label>
+                <input type="text"
+                       data-bind="value: currencyRate.target"
+                       id="target"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="rate" data-i18n="labelRate"></label>
+                <input type="text"
+                       data-bind="value: currencyRate.rate"
+                       id="rate"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success"
+                        data-i18n="buttonFind"
+                        data-bind="click: find"></button>
+                <button class="btn btn-success"
+                        data-i18n="buttonFindAll"
+                        data-bind="click: findAll"></button>
+                <button class="btn btn-warning"
+                        data-i18n="buttonAdd"
+                        data-bind="click: addRate"></button>
+                <button class="btn btn-warning"
+                        data-i18n="buttonUpdate"
+                        data-bind="click: updateRate"></button>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary" data-bind="visible: rates().length > 0">
+        <div class="panel-heading">
+            <h2 class="panel-title" data-i18n="panelRates"></h2>
+        </div>
+        <div class="panel-body">
+            <table id="rates" class="table table-responsive table-striped">
+                <thead>
+                <tr>
+                    <td data-i18n="columnNo"></td>
+                    <td data-i18n="columnBase"></td>
+                    <td data-i18n="columnTarget"></td>
+                    <td data-i18n="columnRate"></td>
+                    <td data-i18n="columnOperations"></td>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: rates">
+                <tr>
+                    <td data-bind="text: $index() + 1"></td>
+                    <td data-bind="text: base"></td>
+                    <td data-bind="text: target"></td>
+                    <td><input type="text" data-bind="value: rate"/></td>
+                    <td>
+                        <button class="btn btn-warning"
+                                data-i18n="buttonUpdate"
+                                data-bind="click: $root.updateRate"></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

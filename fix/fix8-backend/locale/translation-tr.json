@@ -1,0 +1,18 @@
+{
+  "panelCurrencyRate": "Döviz Kuru",
+  "panelRates": "Döviz Kurları",
+  "labelBase": "Taban",
+  "labelTarget": "Hedef",
+  "labelRate": "Oran",
+  "buttonAdd": "Ekle",
+  "buttonUpdate": "Güncelle",
+  "buttonFind": "Ara",
+  "buttonFindAll": "Hepsini Getir",
+  "english": "İngilizce",
+  "turkish": "Türkçe",
+  "columnNo": "Sıra No",
+  "columnBase": "Taban",
+  "columnTarget": "Hedef",
+  "columnRate": "Oran",
+  "columnOperations": "İşlemler"
+}

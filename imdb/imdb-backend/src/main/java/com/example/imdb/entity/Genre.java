@@ -1,5 +1,8 @@
 package com.example.imdb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,8 +11,10 @@ public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="genreid")
+    @JsonIgnore
     private Long id;
     @Column(name="description")
+    //@JsonProperty("isim")
     private String name;
 
     public Genre() {

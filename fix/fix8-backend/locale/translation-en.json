@@ -1,0 +1,19 @@
+{
+  "panelCurrencyRate": "Currency Rate",
+  "panelRates": "Rates",
+  "labelBase": "Base",
+  "labelTarget": "Target",
+  "labelRate": "Rate",
+  "buttonAdd": "Add",
+  "buttonUpdate": "Update",
+  "buttonFind": "Find",
+  "buttonFindAll": "Find All",
+  "buttonDelete": "Delete",
+  "english": "English",
+  "turkish": "Turkish",
+  "columnNo": "No",
+  "columnBase": "Identity No",
+  "columnTarget": "Full Name",
+  "columnRate": "Rate",
+  "columnOperations": "Operations"
+}

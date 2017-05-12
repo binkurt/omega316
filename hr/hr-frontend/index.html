@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Application</title>
+    <style type="text/css">
+        @import url('css/bootstrap.css');
+        @import url('css/bootstrap-theme.css');
+        @import url('css/drag-and-drop.css');
+    </style>
+    <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/lib/i18next-1.7.7.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
+    <script type="text/javascript" src="js/lib/ko-file.js"></script>
+    <script type="text/javascript" src="js/lib/knockout.validation.min.js"></script>
+    <script type="text/javascript" src="js/lib/knockout-localization.js"></script>
+    <script type="text/javascript" src="js/configuration.js"></script>
+    <script type="text/javascript" src="js/utility.js"></script>
+    <script type="text/javascript" src="js/hr.js"></script>
+</head>
+<body>
+<p/>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="col-md-10">
+            </div>
+            <div class="col-md-2">
+                <button data-bind="click: changeLng('tr')"
+                        data-i18n="turkish"
+                        class="btn btn-success"></button>
+                <button data-bind="click: changeLng('en')"
+                        data-i18n="english"
+                        class="btn btn-success"></button>
+            </div>
+            <img data-bind="attr: {src: fileData().dataUrl }"
+                 class=""
+                 style="height: 64px; width: 64px; border-radius: 32px;"
+                 class="img-thumbnail"/>
+            <h3 class="panel-title" data-i18n="panelEmployee"></h3>
+            </h3>
+        </div>
+        <div class="form-group">
+            <label for="logo" data-i18n="labelLogo"></label>
+            <input type="file"
+                   data-bind="fileInput: fileData"
+                   id="logo"
+                   class="form-control" />
+            <div type="text"
+                 id="filedrag"
+                 class="drop-zone"
+                 data-bind="event: {
+    							drop: function (data,e) { $root.insertFile(e,data);},
+    							dragover: function(data,e){ $root.dragover(e);}
+							}"></div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="identityNo" data-i18n="labelIdentityNo"></label>
+                <input type="text"
+                       data-bind="value: employee.identityNo"
+                       id="identityNo"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="name" data-i18n="labelName"></label>
+                <input type="text"
+                       id="name"
+                       data-bind="value: employee.name"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="salary" data-i18n="labelSalary"></label>
+                <input type="text"
+                       id="salary"
+                       data-bind="value: employee.salary"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success"
+                        data-i18n="buttonFind"
+                        data-bind="click: find, enable: employee.identityNo.isValid()"></button>
+                <button class="btn btn-success"
+                        data-i18n="buttonFindAll"
+                        data-bind="click: findAll"></button>
+                <button class="btn btn-warning"
+                        data-i18n="buttonAdd"
+                        data-bind="click: addEmployee, enable: employee.isValid()"></button>
+                <button class="btn btn-warning"
+                        data-i18n="buttonUpdate"
+                        data-bind="click: updateEmployee, enable: employee.isValid()"></button>
+                <button class="btn btn-danger"
+                        data-i18n="buttonDelete"
+                        data-bind="click: removeEmployee, enable: employee.identityNo.isValid()"></button>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title" data-i18n="panelEmployees"></h2>
+        </div>
+        <div class="panel-body">
+            <table id="employees" class="table table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <td data-i18n="columnNo"></td>
+                        <td data-i18n="columnIdentityNo"></td>
+                        <td data-i18n="columnName"></td>
+                        <td data-i18n="columnSalary"></td>
+                        <td data-i18n="columnPhoto"></td>
+                        <td data-i18n="columnOperations"></td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: employees">
+                    <tr data-bind="click: $parent.displayEmp">
+                        <td data-bind="text: $index() + 1"></td>
+                        <td data-bind="text: identityNo"></td>
+                        <td data-bind="text: name"></td>
+                        <td><input type="text" data-bind="value: salary" /></td>
+                        <td><img style="height: 64px; width: 64px; border-radius: 32px;"
+                                 data-bind="attr: {src: ImageUtil.toImage($data.photo())}"/></td>
+                        <td><button class="btn btn-danger"
+                                    data-i18n="buttonDelete"
+                                    data-bind="click: $parent.deleteEmp"></button>
+                            <button class="btn btn-warning"
+                                    data-i18n="buttonUpdate"
+                                    data-bind="click: $root.updateEmployee, enable: $data.salary.isValid()"></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

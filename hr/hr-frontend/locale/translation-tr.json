@@ -1,0 +1,22 @@
+{
+  "panelEmployee": "Çalışan",
+  "panelEmployees": "Tüm Çalışanlar",
+  "labelIdentityNo": "Kimlik No",
+  "labelName": "Ad Soyad",
+  "labelSalary": "Maaş",
+  "labelPhoto": "Fotoğraf",
+  "buttonAdd": "Ekle",
+  "buttonUpdate": "Güncelle",
+  "buttonFind": "Ara",
+  "buttonFindAll": "Tümünü Getir",
+  "buttonDelete": "Sil",
+  "english": "İngilizce",
+  "turkish": "Türkçe",
+  "columnNo": "Sıra No",
+  "columnIdentityNo": "Kimlik No",
+  "columnName": "Ad Soyad",
+  "columnSalary": "Maaş",
+  "columnPhoto": "Fotoğraf",
+  "columnOperations": "İşlemler",
+  "placeholderDropPhoto": "Resmi buraya bırak!"
+}
