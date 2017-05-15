@@ -2,12 +2,19 @@ package com.example.fix.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
+/**
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
 @Entity
 @Table(name="currencies")
+@DynamicInsert
+@DynamicUpdate
 public class CurrencyRate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

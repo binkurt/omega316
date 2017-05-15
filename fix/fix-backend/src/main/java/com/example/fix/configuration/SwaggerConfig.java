@@ -15,6 +15,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import javax.servlet.ServletContext;
 import java.util.Date;
 
+/**
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -25,6 +28,12 @@ public class SwaggerConfig {
     @Value("${build.timestamp}")
     private long timeStamp;
 
+    @Value("${server.address}")
+    private String host;
+
+    @Value("${server.port}")
+    private long port;
+
     @Bean
     public Docket api(ServletContext servletContext) {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -32,7 +41,7 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .host("10.2.2.165:7001")
+                .host(host.concat(Long.toString(port)))
                 .pathProvider(new RelativePathProvider(servletContext) {
                     @Override
                     public String getApplicationBasePath() {

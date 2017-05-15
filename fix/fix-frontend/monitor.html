@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HR Application</title>
+    <title>Currency Rate Monitoring Application</title>
     <style type="text/css">
         @import url('css/bootstrap.css');
         @import url('css/bootstrap-theme.css');
@@ -12,8 +12,12 @@
     <script type="text/javascript" src="js/lib/i18next-1.7.7.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
     <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
+    <script type="text/javascript" src="js/lib/sockjs-0.3.4.js"></script>
+    <script type="text/javascript" src="js/lib/stomp.js"></script>
     <script type="text/javascript" src="js/configuration.js"></script>
-    <script type="text/javascript" src="js/fix.js"></script>
+    <script type="text/javascript" src="js/lib/Chart.bundle.js"></script>
+    <script type="text/javascript" src="js/ko-chart.js"></script>
+    <script type="text/javascript" src="js/monitor.js"></script>
 </head>
 <body>
 <p/>
@@ -37,41 +41,28 @@
             <div class="form-group">
                 <label for="base" data-i18n="labelBase"></label>
                 <input type="text"
-                       data-bind="value: currencyRate.base"
+                       data-bind="value: base"
                        id="base"
                        class="form-control"/>
             </div>
             <div class="form-group">
                 <label for="target" data-i18n="labelTarget"></label>
                 <input type="text"
-                       data-bind="value: currencyRate.target"
+                       data-bind="value: target"
                        id="target"
                        class="form-control"/>
             </div>
             <div class="form-group">
-                <label for="rate" data-i18n="labelRate"></label>
-                <input type="text"
-                       data-bind="value: currencyRate.rate"
-                       id="rate"
-                       class="form-control"/>
-            </div>
-            <div class="form-group">
                 <button class="btn btn-success"
-                        data-i18n="buttonFind"
-                        data-bind="click: find"></button>
-                <button class="btn btn-success"
-                        data-i18n="buttonFindAll"
-                        data-bind="click: findAll"></button>
+                        data-i18n="buttonAdd"
+                        data-bind="click: addToBasket, visible: target().length > 0"></button>
                 <button class="btn btn-warning"
                         data-i18n="buttonAdd"
-                        data-bind="click: addRate"></button>
-                <button class="btn btn-warning"
-                        data-i18n="buttonUpdate"
-                        data-bind="click: updateRate"></button>
+                        data-bind="click: addAllToBasket, visible: target().length == 0"></button>
             </div>
         </div>
     </div>
-    <div class="panel panel-primary" data-bind="visible: rates().length > 0">
+    <div class="panel panel-success" data-bind="visible: rates().length > 0">
         <div class="panel-heading">
             <h2 class="panel-title" data-i18n="panelRates"></h2>
         </div>
@@ -88,19 +79,24 @@
                 </thead>
                 <tbody data-bind="foreach: rates">
                 <tr>
-                    <td data-bind="text: $index() + 1"></td>
-                    <td data-bind="text: base"></td>
-                    <td data-bind="text: target"></td>
-                    <td><input type="text" data-bind="value: rate"/></td>
+                    <td><h4 data-bind="text: $index() + 1" /></td>
+                    <td><h4 data-bind="currency: base" /></td>
+                    <td><h4 data-bind="currency: target" /></td>
+                    <td><h4 data-bind="price: rate" /></td>
                     <td>
-                        <button class="btn btn-warning"
-                                data-i18n="buttonUpdate"
-                                data-bind="click: $root.updateRate"></button>
+                        <button class="btn btn-danger"
+                                data-i18n="buttonDelete"
+                                data-bind="click: $root.removeFromBasket"></button>
+                        <button class="btn btn-info"
+                                data-i18n="buttonGraph"
+                                data-bind="click: $root.displayChart"></button>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+        <div>
+            <canvas data-bind="chart: { type: 'bar', data: data, options: { observeChanges: true, throttle: 100 } }"></canvas>        </div>
     </div>
 
 </div>

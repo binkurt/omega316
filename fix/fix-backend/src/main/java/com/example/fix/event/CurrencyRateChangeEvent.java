@@ -1,6 +1,8 @@
 package com.example.fix.event;
 
-
+/**
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
 public class CurrencyRateChangeEvent {
     private String base;
     private String target;

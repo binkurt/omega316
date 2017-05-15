@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 
 import java.util.Date;
 
+/**
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
 @Controller
 public class FixWebsocketController {
 
@@ -17,11 +20,9 @@ public class FixWebsocketController {
 
     @EventListener()
     public void employeeChanged(CurrencyRateChangeEvent currencyRateChangeEvent){
-        System.err.println("Currency change event has occurred!");
         CurrencyRateChangeMessage currencyRateChangeMessage =
                 new CurrencyRateChangeMessage(currencyRateChangeEvent,new Date());
-        System.err.println("Sending message using the websocket!");
-        messagingTemplate.convertAndSend("changes",currencyRateChangeMessage);
+        messagingTemplate.convertAndSend("/topic/changes",currencyRateChangeMessage);
     }
 
 }

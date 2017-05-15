@@ -9,11 +9,12 @@
   "buttonFind": "Find",
   "buttonFindAll": "Find All",
   "buttonDelete": "Delete",
+  "buttonGraph" : "Graph",
   "english": "English",
   "turkish": "Turkish",
   "columnNo": "No",
-  "columnBase": "Identity No",
-  "columnTarget": "Full Name",
+  "columnBase": "Base",
+  "columnTarget": "Target",
   "columnRate": "Rate",
   "columnOperations": "Operations"
 }

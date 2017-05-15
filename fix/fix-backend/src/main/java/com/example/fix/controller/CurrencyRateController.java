@@ -4,9 +4,13 @@ import com.example.fix.entity.CurrencyRate;
 import com.example.fix.event.CurrencyRateChangeEvent;
 import com.example.fix.repository.CurrencyRateRepository;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
 @RestController
 @RequestMapping("/rates")
 @CrossOrigin
@@ -46,8 +53,18 @@ public class CurrencyRateController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value="Retrieves all currency rates",response = Collection.class)
-    public Collection<CurrencyRate> findAllRates(){
-        return currencyRateRepository.findAll();
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", dataType = "string", paramType = "query",
+                    value = "Results page you want to retrieve (0..N)"),
+            @ApiImplicitParam(name = "size", dataType = "string", paramType = "query",
+                    value = "Number of records per page."),
+            @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+                    value = "Sorting criteria in the format: property(,asc|desc). " +
+                            "Default sort order is ascending. " +
+                            "Multiple sort criteria are supported.")
+    })
+    public Page<CurrencyRate> findAllRates(Pageable pageable){
+        return currencyRateRepository.findAll(pageable);
     }
 
 

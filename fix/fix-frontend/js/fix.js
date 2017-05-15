@@ -1,14 +1,20 @@
-var CurrencyRate = function (data) {
+/**
+ * Model
+ * @param data is the initializing model
+ * @constructor
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
+var CurrencyRate = function (model) {
     var self = this;
 
     self.base = ko.observable();
     self.target = ko.observable();
     self.rate = ko.observable();
 
-    if (data != undefined) {
-        self.base(data.base);
-        self.target(data.target);
-        self.rate(data.rate);
+    if (model != undefined) {
+        self.base(model.base);
+        self.target(model.target);
+        self.rate(model.rate);
     }
 
     self.toJsonString = function () {
@@ -20,14 +26,14 @@ var CurrencyRate = function (data) {
         return JSON.stringify(currencyRate);
     };
 
-    self.update = function (data) {
-        for (var attr in data) {
-            if (self.hasOwnProperty(attr) && data[attr] != undefined) {
+    self.update = function (model) {
+        for (var attr in model) {
+            if (self.hasOwnProperty(attr) && model[attr] != undefined) {
                 if (ko.isComputed(self[attr])) continue;
-                if ((ko.isObservable(self[attr]) && ko.isObservable(data[attr]))) {
-                    self[attr](data[attr]());
-                } else if ((ko.isObservable(self[attr]) && !ko.isObservable(data[attr]))) {
-                    self[attr](data[attr]);
+                if ((ko.isObservable(self[attr]) && ko.isObservable(model[attr]))) {
+                    self[attr](model[attr]());
+                } else if ((ko.isObservable(self[attr]) && !ko.isObservable(model[attr]))) {
+                    self[attr](model[attr]);
                 }
             }
         }
@@ -35,27 +41,39 @@ var CurrencyRate = function (data) {
 
 };
 
-var FixViewModel = function () {
+/**
+ * View Model
+ * @constructor
+ */
+var CurrencyRateViewModel = function () {
     var self = this;
 
+    // Observable View Model Attributes
     self.currencyRate = new CurrencyRate();
     self.rates = ko.observableArray([]);
 
-    // Allows user to change the UI Language
+    /**
+     *   Allows user to change the UI Language
+     */
     self.changeLng = function (lang) {
         i18n.setLng(lang, function () {
             $(document).i18n();
         });
     }
 
-    // Activates the Language Selection
+    /**
+     *   Activates the Language Selection
+     */
     self.i18n = function () {
         $(document).i18n();
     };
 
+    /**
+     * Finds currency rate either by "base" or by "base and target"
+     */
     self.find = function () {
-      if (self.currencyRate.base() != undefined){
-          if (self.currencyRate.target() != undefined ){
+      if (self.currencyRate.base() != undefined && self.currencyRate.base().length>0){
+          if (self.currencyRate.target() != undefined && self.currencyRate.target().length>0){
               self.findByBaseAndTarget();
           } else {
               self.findByBase();
@@ -63,7 +81,9 @@ var FixViewModel = function () {
       }
     };
 
-    // Retrieves the rates by base
+    /**
+     * Retrieves the rates by base
+     */
     self.findByBase = function () {
         $.ajax({
             method: "GET",
@@ -80,7 +100,9 @@ var FixViewModel = function () {
         });
     };
 
-    // Retrieves the rates by base and target
+    /**
+     * Retrieves the rates by base and target
+     */
     self.findByBaseAndTarget = function () {
         $.ajax({
             method: "GET",
@@ -94,16 +116,18 @@ var FixViewModel = function () {
         });
     };
 
-    // Retrieves all rates
+    /**
+     * Retrieves all rates
+     */
     self.findAll = function () {
         $.ajax({
             method: "GET",
             url: AppConfig.URL("/rates"),
             cache: false,
-            success: function (rates) {
+            success: function (page) {
                 self.rates([]);
-                for (var i in rates) {
-                    var rate = rates[i];
+                for (var i in page.content) {
+                    var rate = page.content[i];
                     self.rates.push(new CurrencyRate(rate));
                 }
                 self.i18n();
@@ -111,7 +135,9 @@ var FixViewModel = function () {
         })
     };
 
-    // Adds new currency rate
+    /**
+     * Adds new currency rate
+     */
     self.addRate = function () {
         $.ajax({
             method: "POST",
@@ -124,7 +150,10 @@ var FixViewModel = function () {
         })
     };
 
-    // Updates an existing rate
+    /**
+     * Updates an existing rate
+     * @param rate is used to update the resource
+     */
     self.updateRate = function (rate) {
         var jsonData = "";
         if (rate == self) {
@@ -143,14 +172,17 @@ var FixViewModel = function () {
         })
     };
 
-    // copies an employee to the view model
+    /**
+     * copies an employee to the view model
+      * @param rate is the model used to update the view model
+     */
     self.displayRate = function (rate) {
         self.currencyRate.update(rate);
     };
 
 };
 
-$(document).ready(function () {
+var Application= function () {
     i18n.init({
         lng: "en",
         resGetPath: "locale/__ns__-__lng__.json",
@@ -158,5 +190,7 @@ $(document).ready(function () {
     }, function (t) {
         $(document).i18n();
     });
-    ko.applyBindings(new FixViewModel());
-});
+    ko.applyBindings(new CurrencyRateViewModel());
+};
+
+$(document).ready(Application);

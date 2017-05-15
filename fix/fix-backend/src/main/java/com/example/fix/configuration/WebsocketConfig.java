@@ -8,6 +8,9 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
+/**
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
 @Configuration
 @EnableWebSocket
 @EnableWebSocketMessageBroker
@@ -23,7 +26,7 @@ public class WebsocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/human-resource")
+        registry.addEndpoint("/changes")
                 .setAllowedOrigins("*")
                 .withSockJS();
     }

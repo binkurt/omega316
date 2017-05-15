@@ -8,6 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
+/**
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
 @SpringBootApplication
 @Import({
 	SwaggerConfig.class,

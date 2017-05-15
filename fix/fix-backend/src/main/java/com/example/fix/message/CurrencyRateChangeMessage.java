@@ -3,6 +3,9 @@ package com.example.fix.message;
 import com.example.fix.event.CurrencyRateChangeEvent;
 import java.util.Date;
 
+/**
+ * @author Binnur Kurt (binnur.kurt@gmail.com)
+ */
 public class CurrencyRateChangeMessage {
     private CurrencyRateChangeEvent event;
     private Date date;
